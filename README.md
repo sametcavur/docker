@@ -55,3 +55,7 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker version** : Versiyon bilgilerini gösterir.
 
 **docker info** : Aktif olarak kaç container çalışıyor,kaç image var gibi bilgileri gösteren komut
+
+**docker container ls** : Aktif olarak çalışan containerları gösterir.
+
+**docker container ls -a** Aktif ve pasif tüm containerları gösterir.
