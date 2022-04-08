@@ -56,6 +56,10 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker info** : Aktif olarak kaç container çalışıyor,kaç image var gibi bilgileri gösteren komut
 
-**docker container ls** : Aktif olarak çalışan containerları gösterir.
+**docker container ls (ps'de aynı işi görüyor)** : Aktif olarak çalışan containerları gösterir.
 
-**docker container ls -a** Aktif ve pasif tüm containerları gösterir.
+**docker container ls (ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
+
+**docker container stop -containerID or containerName-** : Belirtilen containerı durdurur.
+
+**docker container rm -containerID or containerName-** : Belirtilen containerı siler. (Containerlar UP durumda silinmez!).
