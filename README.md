@@ -19,7 +19,7 @@ harcıyorlar, docker ise tek bir işletim sistemi üzerinde birden fazla sunucu 
 eforları yerine artık tek bir işletim sistemi efor harcıyor.Ayrıca diyelim ki sanal makinanız içindeki uygulamayı başka bir yere taşımak istediniz bu çok yorucu 
 ve zahmetli bir iştir.Fakat docker kullanırsanız, taşımak istediğiniz pc'de docker olması yeterlidir. Ayrıca containerlar VM'e göre çok daha hızlıdırlar.
 
-<img src="https://user-images.githubusercontent.com/54666839/162386446-774bf897-d254-4a45-b277-ff3e301a16b4.png" width="425"/> 
+<img src="https://user-images.githubusercontent.com/54666839/162386446-774bf897-d254-4a45-b277-ff3e301a16b4.png" width="625"/> 
 
 Docker Engine 3 componentten oluşur :
 - Docker Daemon : Volumes,İmage,Container,Network yaratmamızı ve yönetmemizi sağlar.
@@ -31,7 +31,7 @@ Bir sunucunun içerdiği tüm componentlerin bir şablonudur. Örnekle bir sunuc
 için bir jre var, image bunların hepsinin tutulduğu bir alandır fakat sunucudan tek farkı imageler içinde çekirdek yani kernel bulunmaz, containerın bulunduğu işletim 
 sisteminin kernelini kullanır. Container ise bu imagenin çalışır halidir. Biz imageleri pull eder çalıştırarak container oluştururuz.
 
-<img src="https://user-images.githubusercontent.com/54666839/162386304-e333d2b8-d115-4f2b-b811-900abbdb2b5b.png" width="425"/> 
+<img src="https://user-images.githubusercontent.com/54666839/162386304-e333d2b8-d115-4f2b-b811-900abbdb2b5b.png" width="625"/> 
 
 
 ### Commands :
@@ -43,12 +43,12 @@ getirdiler artık hello-world appini çalıştırmak istediğimizde -docker çal
 docker management commands altında bu container gibi çalışma alanlarımız mevcut.
 ->Commands dockera ait diğer tüm komutlar
 
-<img src="https://user-images.githubusercontent.com/54666839/162386573-6379fcc4-f23f-478d-b0a9-b5dec0d4cbac.png" width="425"/> 
+<img src="https://user-images.githubusercontent.com/54666839/162386573-6379fcc4-f23f-478d-b0a9-b5dec0d4cbac.png" width="625"/> 
 
 <img src="https://user-images.githubusercontent.com/54666839/162387597-b25c3157-45e8-4fa7-8693-01ba58619d1b.png" width="425"/> 
 
 
-**docker image --help** , **docker container --help** : herhangi bir management commands yazdık ama devamında ne yapacağımızı unuttuk --help yazarak o management commandsta
+**docker image --help** , **docker container --help** : Herhangi bir management commands yazdık ama devamında ne yapacağımızı unuttuk --help yazarak o management commandsta
 hangi komutları kullanabileceğimizi görürüz.
 
 **docker version** : Versiyon bilgilerini gösterir.
