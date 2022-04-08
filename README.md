@@ -36,12 +36,12 @@ sisteminin kernelini kullanır. Container ise bu imagenin çalışır halidir. B
 
 ### Commands :
 **docker** : Dockerı ait bütün komutları listeler. Options, Management Commands ve Commands adında 3 başlığı vardır. 
-->Options altındaki komutlar docker deamon'a bağlanırken kullanabileceğimiz komutlar var.
-->Management Commands altında docker komutlarını nerede çalıştıracağımızı söyleyen komutlar var, Örnekle, 2016 yılından önce dockerda bir iş yapmak istiyorsak mesela 
+- Options altındaki komutlar docker deamon'a bağlanırken kullanabileceğimiz komutlar var.
+- Management Commands altında docker komutlarını nerede çalıştıracağımızı söyleyen komutlar var, Örnekle, 2016 yılından önce dockerda bir iş yapmak istiyorsak mesela 
 hello-world app'ini çalıştırmak istiyorsak docker run hello-world yazınca iş bitiyor container çalışıyordu, fakat 2016'dan sonra docker karmaşıklaşınca şöyle bi çözüm
 getirdiler artık hello-world appini çalıştırmak istediğimizde -docker çalıştırmakİstediğimizAlan komut- yani docker container run hello-world sistemini getirdi, işte 
 docker management commands altında bu container gibi çalışma alanlarımız mevcut.
-->Commands dockera ait diğer tüm komutlar
+- Commands dockera ait diğer tüm komutlar
 
 <img src="https://user-images.githubusercontent.com/54666839/162386573-6379fcc4-f23f-478d-b0a9-b5dec0d4cbac.png" width="625"/> 
 
