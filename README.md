@@ -33,6 +33,8 @@ sisteminin kernelini kullanır. Container ise bu imagenin çalışır halidir. B
 
 <img src="https://user-images.githubusercontent.com/54666839/162386304-e333d2b8-d115-4f2b-b811-900abbdb2b5b.png" width="625"/> 
 
+### Docker Registry :
+Docker imagelarının tutulduğu repository. En meşhuru ve en çok kullanılanı docker hub'tır. Docker dünyasının githubı olarak düşünebiliriz.
 
 ### Commands :
 **docker** : Dockerı ait bütün komutları listeler. Options, Management Commands ve Commands adında 3 başlığı vardır. 
