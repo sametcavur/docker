@@ -48,9 +48,8 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 <img src="https://user-images.githubusercontent.com/54666839/162387597-b25c3157-45e8-4fa7-8693-01ba58619d1b.png" width="425"/> 
 
 
-**docker image --help** , **docker container --help** : Herhangi bir management commands yazdık ama devamında ne yapacağımızı unuttuk --help yazarak o management commandsta
-hangi komutları kullanabileceğimizi görürüz.
+**docker image --help** , **docker container --help** : Herhangi bir management commands yazdık ama devamında ne yapacağımızı unuttuk --help yazarak o management commandsta hangi komutları kullanabileceğimizi görürüz. Yazacağımız herhangi bir komutun sonuna --help koymak o komutu nasıl kullancağımızı da anlatır.
 
 **docker version** : Versiyon bilgilerini gösterir.
 
-**docker info** : Aktif olarak kaç container çalışıyor,kaç image var gibi
+**docker info** : Aktif olarak kaç container çalışıyor,kaç image var gibi bilgileri gösteren komut
