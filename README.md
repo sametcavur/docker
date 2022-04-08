@@ -16,6 +16,8 @@ Docker : Docker şudur, yukarıda sanallaştırma işini yapıyor fakat sanalla�
 harcıyorlar, docker ise tek bir işletim sistemi üzerinde birden fazla sunucu çalıştırmamıza olanak sağlıyor ve 5 işletim sisteminin temel işleri için harcayacağı
 eforları yerine artık tek bir işletim sistemi efor harcıyor.Ayrıca diyelim ki sanal makinanız içindeki uygulamayı başka bir yere taşımak istediniz bu çok yorucu 
 ve zahmetli bir iştir.Fakat docker kullanırsanız, taşımak istediğiniz pc'de docker olması yeterlidir. Ayrıca containerlar VM'e göre çok daha hızlıdırlar.
+![image](https://user-images.githubusercontent.com/54666839/162386446-774bf897-d254-4a45-b277-ff3e301a16b4.png)
+
 
 Docker Engine 3 componentten oluşur :
 Docker Daemon : Volumes,İmage,Container,Network yaratmamızı ve yönetmemizi sağlar.
@@ -35,6 +37,8 @@ hello-world app'ini çalıştırmak istiyorsak docker run hello-world yazınca i
 getirdiler artık hello-world appini çalıştırmak istediğimizde -docker çalıştırmakİstediğimizAlan komut- yani docker container run hello-world sistemini getirdi, işte 
 docker management commands altında bu container gibi çalışma alanlarımız mevcut.
 ->Commands dockera ait diğer tüm komutlar
+![image](https://user-images.githubusercontent.com/54666839/162386573-6379fcc4-f23f-478d-b0a9-b5dec0d4cbac.png)
+![image](https://user-images.githubusercontent.com/54666839/162387597-b25c3157-45e8-4fa7-8693-01ba58619d1b.png)
 
 2.docker image --help , docker container --help : herhangi bir management commands yazdık ama devamında ne yapacağımızı unuttuk --help yazarak o management commandsta
 hangi komutları kullanabileceğimizi görürüz.
