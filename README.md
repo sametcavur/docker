@@ -63,3 +63,7 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker container stop -containerID or containerName-** : Belirtilen containerı durdurur.
 
 **docker container rm -containerID or containerName-** : Belirtilen containerı siler. (Containerlar UP durumda silinmez!).
+
+**docker container rm -f -containerID or containerName-** : Belirtilen containerı silmeye zorlar. Kesin sileceğimiz containerlar silerken sıkıntı çıkartırsa bunu kullanabiliriz.
+
+
