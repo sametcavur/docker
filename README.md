@@ -56,9 +56,13 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker info** : Aktif olarak kaç container çalışıyor,kaç image var gibi bilgileri gösteren komut
 
-**docker container ls (ps'de aynı işi görüyor)** : Aktif olarak çalışan containerları gösterir.
+**docker container ls (docker ps'de aynı işi görüyor)** : Aktif olarak çalışan containerları gösterir.
 
-**docker container ls -a (ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
+**docker container ls -a (docker ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
+
+**docker image ls** : Aktif olarak çalışan imageleri gösterir.
+
+**docker image ls -a** : Aktif ve pasif tüm imageleri gösterir.
 
 **docker container create -imageID or imageName-** : Belirtilen image'den container oluşturur fakat çalıştırmaz.
 
@@ -69,8 +73,33 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker container run -imageID or imageName-** : Belirtilen image'den hem container oluşturur hem o containerı çalıştırır. Image localimizde yoksa bile docker registry'den(dockerHub) gider alır.
 
 **docker container rm -containerID or containerName-** : Belirtilen containerı siler. (Containerlar UP durumda silinmez!).
+**docker image rm -imageID or imageName-**
 
 **docker container rm -f -containerID or containerName-** : Belirtilen containerı silmeye zorlar. Kesin sileceğimiz containerlar silerken sıkıntı çıkartırsa bunu kullanabiliriz.
+**docker image rm -f -imageID or imageName-**
 
 **attach mode , detach mode** : Containerı başlatırken, o cantainerın arkada planda mı yoksa bizim localimizde mi çalışacağını belirtiriz. Eğer Detach mode ile kullanırsak **docker run -d imageID** şeklinde komut yazmamız lazım ve localimizdeki cmd yine bize aittir, çalıştırdığımız containera gitmez. Fakat bu -d yi yazmasaydık attach mode ile devam etmiş olurduk ve cmd de yazacağımız komutlar containerımızın komutları olurdu.
+
+**docker container exec --it -containerID or containerName- -sh/bash/powershell-** : Bu exec komutu ile "detach modda" çalıştırdığımız("çalışan containera") yani arka planda çalıştırdığımız yani komut satırına ulaşamadığımız containerın komut satırına ulaşmak için kullanıyoruz. Burada exec komutu bize bu işlemi yaptırıyor ve komutun sonundaki sh/bash/powerhell kısmı ise o containerın kurulu olduğu işletim sisteminin komut satırına ulaşmak için yazdığımız kod.(sh:alphine, bash:ubuntu) Örnek: Diyelim ki localimizdeki işletim sistemi Windows ve containarın içerisinde ubuntu var, O zaman o containerı exec yani execute ettikten sonra artık ubuntu komutlarını yazmalıyız.Buradaki --it aslında --interactive --tty komutlarının birleşimi ve belirtilen container ile bir terminal bağlantısı kur demek. 
+
+**NOT** : exit ile stop arasındaki fark, exit ile çalışan container içindeyken o containerdan çıkarız ve kendi komut satırımıza döneriz ama container çalışmaya devam eder, stop ile containerın çalışmasını durdururuz.
+
+**docker container prune** : Çalışmayan* bütün containerları siler, Silmeden onay ister.
+
+**docker image prune -a** : Bütün imageleri siler, Silmeden onay ister.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
