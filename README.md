@@ -58,7 +58,7 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker container ls (ps'de aynı işi görüyor)** : Aktif olarak çalışan containerları gösterir.
 
-**docker container ls (ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
+**docker container ls -a (ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
 
 **docker container stop -containerID or containerName-** : Belirtilen containerı durdurur.
 
