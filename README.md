@@ -60,9 +60,13 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker container ls -a (ps -a'da aynı işi görüyor)** : Aktif ve pasif tüm containerları gösterir.
 
+**docker container create -imageID or imageName-** : Belirtilen image'den container oluşturur fakat çalıştırmaz.
+
 **docker container start -containerID or containerName-** : Belirtilen containerı çalıştırır.
 
 **docker container stop -containerID or containerName-** : Belirtilen containerı durdurur.
+
+**docker container run -imageID or imageName-** : Belirtilen image'den hem container oluşturur hem o containerı çalıştırır. Image localimizde yoksa bile docker registry'den(dockerHub) gider alır.
 
 **docker container rm -containerID or containerName-** : Belirtilen containerı siler. (Containerlar UP durumda silinmez!).
 
