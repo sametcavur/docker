@@ -89,9 +89,14 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker image prune -a** : Bütün imageleri siler, Silmeden onay ister.
 
 
+### Volume :
+Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
 
+docker volume --help diyerek bir çok şeyi inceleyebilirsin.
 
+**docker volume create -volumeName-** : Yeni bir volume oluşturma.
 
+ls, rm, prune ve inspect gibi image ile containerlardaki aynı komutları volumeler içinde kullanabiliriz.
 
 
 
