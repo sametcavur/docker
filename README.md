@@ -72,6 +72,8 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker container run -imageID or imageName-** : Belirtilen image'den hem container oluşturur hem o containerı çalıştırır. Image localimizde yoksa bile docker registry'den(dockerHub) gider alır.
 
+**docker container run --rm -imageID or imageName-** : Belirtilen image'den hem container oluşturur hem o containerı çalıştırır fakat container durduğu anda containera siler.
+
 **docker container rm -containerID or containerName-** : Belirtilen containerı siler. (Containerlar UP durumda silinmez!).
 **docker image rm -imageID or imageName-**
 
@@ -100,6 +102,7 @@ ls, rm, prune ve inspect gibi image ile containerlardaki aynı komutları volume
 
 <img src="https://user-images.githubusercontent.com/54666839/162627720-637e60e9-d203-4def-ac5f-22546e04226c.png" width="925"/> 
 
+docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, bu container içerisinde gezinebiliriz ama değişiklik yapamayız.
 
 
 
