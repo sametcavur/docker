@@ -98,7 +98,7 @@ docker volume --help diyerek bir çok şeyi inceleyebilirsin.
 
 ls, rm, prune ve inspect gibi image ile containerlardaki aynı komutları volumeler içinde kullanabiliriz.
 
-<img src="volume.png" width="625"/> 
+<img src="![image](https://user-images.githubusercontent.com/54666839/162627720-637e60e9-d203-4def-ac5f-22546e04226c.png)" width="625"/> 
 
 
 
