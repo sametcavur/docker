@@ -106,6 +106,9 @@ docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, b
 
 
 
+**Bind Mounts** : Bilgisayarımızdaki herhangi bir dosyayı,klasörü vs. container içerisine atmaya denir.
+Üstteki görseldeki gibi bind mounts yapabiliriz tek fark volume adının yerine localimizdeki bağlamak istediğimiz klasörü yazıyoruz.
 
+--> **docker container run -d -p 80:80 -v C:\Users\samet.cavur\Desktop\deneme:/usr/share/nginx/html/ nginx**
 
 
