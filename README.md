@@ -112,11 +112,36 @@ docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, b
 --> **docker container run -d -p 80:80 -v C:\Users\samet.cavur\Desktop\deneme:/usr/share/nginx/html/ nginx**
 
 
-**Docker Networks** :
-Bu konunun mantığı şöyledir. Diyelim ki birden fazla containerımız var yada containerımızı third party bir container ile haberleştireceğiz işte bu Docker Network türleri ile containerların birbirleriyle haberleşmesini sağlıyoruz.
+###Docker Networks :
+Bu konunun mantığı şöyledir. Diyelim ki birden fazla containerımız var yada containerımızı third party bir container ile haberleştireceğiz işte bu Docker Network türleri ile containerların birbirleriyle haberleşmesini sağlıyoruz. Docker engine kurulu makinada bridge,host ve none network objeleri otomatik kurulur.
 Network Türleri:
-- Bridge : Adından da anlaşılacağı üzere iki container arasında köprü kurar ve haberleşmelerini sağlar. Eğer bir containerı network tanımlaması yapmaz isek bu network türünü default olarak kullanır.
-- Host : Bridge gibi iki container arasında köprü kurmak yerine belli bir host belirler ve tüm containerları o hosta bağlar.
-- Macvlan : Bu network ile oluşturulan ağ objelerine bağlı containerlara bir mac adresi atar ve containerları fiziksel bir cihaz gibi görür. (MAC Adresi : Bir bilgisayar ağında, bir cihazın ağ donanımını tanımaya yarar)
-- None : Bu network türünce containerın herhangi bir ağ bağlantısı networkü olmadığı varsayılır.
-- Overlay : Kümeleme gibi düşünebiliriz. Haberleşmesini istediğimiz containerları bir küme haline getiriyoruz ve hepsinin tek bir ağ bağlantısı olduğunu varsayıyoruz.
+- **Bridge** : Adından da anlaşılacağı üzere iki container arasında köprü kurar ve haberleşmelerini sağlar. Eğer bir containerı network tanımlaması yapmaz isek bu network türünü default olarak kullanır.
+- **Host** : Bridge gibi iki container arasında köprü kurmak yerine belli bir host belirler ve tüm containerları o hosta bağlar.
+- **Macvlan** : Bu network ile oluşturulan ağ objelerine bağlı containerlara bir mac adresi atar ve containerları fiziksel bir cihaz gibi görür. (MAC Adresi : Bir bilgisayar ağında, bir cihazın ağ donanımını tanımaya yarar)
+- **None** : Bu network türünce containerın herhangi bir ağ bağlantısı networkü olmadığı varsayılır.
+- **Overlay** : Kümeleme gibi düşünebiliriz. Haberleşmesini istediğimiz containerları bir küme haline getiriyoruz ve hepsinin tek bir ağ bağlantısı olduğunu varsayıyoruz.
+
+**docker network inspect -none,bridge,host-** : Bu komut ile belirtilen networkün tüm özelliklerini görebiliriz. Bu networke bağlı containerları da aynı zamanda görebiliriz.
+
+
+
+**Port Publish** : Bu konuyu şöyle açıklayabiliriz. Üstteki networks konusunda gördüğümüz host network'ü kullanarak containerların haberleşmesini sağladığımızı varsayalım. Fakat Bu containerlara third party bir erişim olmasını istediğimizde bizim bu containerlarını out'a publish etmiş olmamız lazım. Bunu ise şöyle yapıyoruz.
+
+-p yada --publish komutlarını kullanıyoruz.
+
+Örnek : docker container run -d -p 8080:80 -imagemiz-   --> İşte buradaki [-p 8080:80] port publish etme işlemi oluyor ve ilk 8080 yazdığımız host portumuz ikinci yazdığımız 80 ise container portumuz.
+
+NOT: Tek komutta birden fazla port publish edilebilir.
+
+
+
+
+
+
+
+
+
+
+
+
+
