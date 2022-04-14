@@ -112,7 +112,7 @@ docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, b
 --> **docker container run -d -p 80:80 -v C:\Users\samet.cavur\Desktop\deneme:/usr/share/nginx/html/ nginx**
 
 
-###Docker Networks :
+### Docker Networks :
 Bu konunun mantığı şöyledir. Diyelim ki birden fazla containerımız var yada containerımızı third party bir container ile haberleştireceğiz işte bu Docker Network türleri ile containerların birbirleriyle haberleşmesini sağlıyoruz. Docker engine kurulu makinada bridge,host ve none network objeleri otomatik kurulur.
 Network Türleri:
 - **Bridge** : Adından da anlaşılacağı üzere iki container arasında köprü kurar ve haberleşmelerini sağlar. Eğer bir containerı network tanımlaması yapmaz isek bu network türünü default olarak kullanır.
