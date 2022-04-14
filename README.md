@@ -116,8 +116,7 @@ docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, b
 Bu konunun mantığı şöyledir. Diyelim ki birden fazla containerımız var yada containerımızı third party bir container ile haberleştireceğiz işte bu Docker Network türleri ile containerların birbirleriyle haberleşmesini sağlıyoruz.
 Network Türleri:
 - Bridge : Adından da anlaşılacağı üzere iki container arasında köprü kurar ve haberleşmelerini sağlar. Eğer bir containerı network tanımlaması yapmaz isek bu network türünü default olarak kullanır.
-<img src="https://user-images.githubusercontent.com/54666839/163385684-0324ac47-a60a-4ddd-81fd-bf6c822500ff.png" width="425"/> 
-- Host :
-- Macvlan :
-- None :
-- Overlay :
+- Host : Bridge gibi iki container arasında köprü kurmak yerine belli bir host belirler ve tüm containerları o hosta bağlar.
+- Macvlan : Bu network ile oluşturulan ağ objelerine bağlı containerlara bir mac adresi atar ve containerları fiziksel bir cihaz gibi görür. (MAC Adresi : Bir bilgisayar ağında, bir cihazın ağ donanımını tanımaya yarar)
+- None : Bu network türünce containerın herhangi bir ağ bağlantısı networkü olmadığı varsayılır.
+- Overlay : Kümeleme gibi düşünebiliriz. Haberleşmesini istediğimiz containerları bir küme haline getiriyoruz ve hepsinin tek bir ağ bağlantısı olduğunu varsayıyoruz.
