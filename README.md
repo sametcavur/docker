@@ -116,7 +116,7 @@ docker run -it -v ilkVolume:/App:ro centos sh : Buradaki "ro" Read only demek, b
 Bu konunun mantığı şöyledir. Diyelim ki birden fazla containerımız var yada containerımızı third party bir container ile haberleştireceğiz işte bu Docker Network türleri ile containerların birbirleriyle haberleşmesini sağlıyoruz.
 Network Türleri:
 - Bridge : Adından da anlaşılacağı üzere iki container arasında köprü kurar ve haberleşmelerini sağlar. Eğer bir containerı network tanımlaması yapmaz isek bu network türünü default olarak kullanır.
-    <img src="https://user-images.githubusercontent.com/54666839/163385684-0324ac47-a60a-4ddd-81fd-bf6c822500ff.png" width="425"/> 
+  <img src="https://user-images.githubusercontent.com/54666839/163385684-0324ac47-a60a-4ddd-81fd-bf6c822500ff.png" width="425"/> 
 - Host :
 - Macvlan :
 - None :
