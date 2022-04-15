@@ -1,3 +1,7 @@
+**Genel Notlar** :
+ping -containerIsmi- : Çalışan bir containera ping atma, bu pingi durdukmak için ctrl + C yapmamız lazım
+
+Herhangi bir containerı stop yada exit edip durdurmadan çıkmak istiyorsak ctrl P + ctrl Q basmalıyız(read escape sequence)
 
 İşletim Sistemi : Donanımların(Monitor,Ram,Ekran Kartı vs) uygulamaları çalışmasına aracılık eden yazılım.
 
@@ -123,6 +127,36 @@ Network Türleri:
 
 **docker network inspect -none,bridge,host-** : Bu komut ile belirtilen networkün tüm özelliklerini görebiliriz. Bu networke bağlı containerları da aynı zamanda görebiliriz.
 
+Docker bize default olarak bridge networkü verse de zaman zaman kendi customer bridge networklerimizi yaratmak isteyebiliriz. Onu da şöyle yaparız:
+
+**docker network create --driver=host deneme2** : deneme2 adında host networkü  yaratma(fakat local makine yalnızca 1 tane host networke izin verir)
+
+**docker network create customerBridge** : Default olarak tanımlanan networkten(Bridgeden) customerBridge adında bir network yarat.
+
+**Örnek**
+2 tane container yaratacağız ve aynı network üzerinde tanımlayarak birbirleriyle haberleşmelerini sağlayacağız. 
+
+1- Öncelikle network yaratalım : docker network create kopru1
+2- 2 tane container yaratalım ve networklerinin kopru1 olduğunu tanımlayalım : 
+docker container run -d -it --name cont1 --net kopru1 sametcavur/image
+docker container run -d -it --name cont2 --net kopru1 sametcavur/image
+3- Herhangi bir containera girelim ve diğerine ping atalım.
+docker container exec -it cont2 sh
+ping con1
+4.Burada artık cont2 nin cont1 e ping attığını göreceğiz.Pingi durdurmak için ctrl+C bas, Containerı durdumadan containerdan çıkmak için ctrl+P+Q bas.
+
+**Not** : Eğer 2 tane containerı aynı network üzerinde yaratmazsak birbirlerine container isimleri ile ping atamazlar, containerlara inspect ile girip ip adreslerini almamız lazım, ip adresleri üzerinden ping atabiliriz.
+
+**NOT** : Subneti,Gateway,İprange i de custom olsun diyorsak alttaki gibi daha da özel networkler yaratabiliriz.
+ 
+docker network create --driver=bridge --subnet=10.10.0.0/16 --ip-range=10.10.10.0/24 --gateway=10.10.10.10 CustomKopru
+
+**NOT** : Default bridge yerine custom bridge kullanmak daha iyidir. Çünkü default bridge network altında tanımlanmış çalışan bir containerın bağlantısını kesemez yada başka networke bağlayamazsınız. Fakat Customer bridge network altındaki containerın bağlantısını kesip birden fazla networke bağlayabilirsiniz. Bu işlemide şöyle bir komut satırı ile yapabilirsin.
+docker network connect -networkIsmi- -container- : Bu containerı bu networke bağla demek.
+docker network disconnect -networkIsmi- -container- : Bu contarinerın bu network ile bağlantısını kes demek.
+
+**NOT** : Bir network rm ile sileceğimiz zaman altında hiç bir container olmamalı.
+
 
 
 **Port Publish** : Bu konuyu şöyle açıklayabiliriz. Üstteki networks konusunda gördüğümüz host network'ü kullanarak containerların haberleşmesini sağladığımızı varsayalım. Fakat Bu containerlara third party bir erişim olmasını istediğimizde bizim bu containerlarını out'a publish etmiş olmamız lazım. Bunu ise şöyle yapıyoruz.
@@ -132,6 +166,7 @@ Network Türleri:
 Örnek : docker container run -d -p 8080:80 -imagemiz-   --> İşte buradaki [-p 8080:80] port publish etme işlemi oluyor ve ilk 8080 yazdığımız host portumuz ikinci yazdığımız 80 ise container portumuz.
 
 NOT: Tek komutta birden fazla port publish edilebilir.
+
 
 
 
