@@ -144,19 +144,19 @@ Docker bize default olarak bridge networkü verse de zaman zaman kendi customer 
 
 1. Öncelikle network yaratalım : 
 
-  -> docker network create kopru1
+  -> **docker network create kopru1**
 
 2. 2 tane container yaratalım ve networklerinin kopru1 olduğunu tanımlayalım : 
 
-  -> docker container run -d -it --name cont1 --net kopru1 sametcavur/image
+  -> **docker container run -d -it --name cont1 --net kopru1 sametcavur/image**
 
-  -> docker container run -d -it --name cont2 --net kopru1 sametcavur/image
+  -> **docker container run -d -it --name cont2 --net kopru1 sametcavur/image**
 
 3. Herhangi bir containera girelim ve diğerine ping atalım.
 
-  -> docker container exec -it cont2 sh
+  -> **docker container exec -it cont2 sh**
 
-  -> ping con1
+  -> **ping con1**
 
 4. Burada artık cont2 nin cont1 e ping attığını göreceğiz.Pingi durdurmak için ctrl+C bas, Containerı durdumadan containerdan çıkmak için ctrl+P+Q bas.
 
@@ -164,13 +164,13 @@ Docker bize default olarak bridge networkü verse de zaman zaman kendi customer 
 
 **NOT** : Subneti,Gateway,İprange i de custom olsun diyorsak alttaki gibi daha da özel networkler yaratabiliriz.
  
-docker network create --driver=bridge --subnet=10.10.0.0/16 --ip-range=10.10.10.0/24 --gateway=10.10.10.10 CustomKopru
+**docker network create --driver=bridge --subnet=10.10.0.0/16 --ip-range=10.10.10.0/24 --gateway=10.10.10.10 CustomKopru**
 
 **NOT** : Default bridge yerine custom bridge kullanmak daha iyidir. Çünkü default bridge network altında tanımlanmış çalışan bir containerın bağlantısını kesemez yada başka networke bağlayamazsınız. Fakat custom oluşturuluşmuş bridge network altındaki containerın bağlantısını kesip birden fazla networke bağlayabilirsiniz. Bu işlemide şöyle bir komut satırı ile yapabilirsin.
 
-docker network connect -networkIsmi- -container- : Bu containerı bu networke bağla demek.
+**docker network connect -networkIsmi- -container-** : Bu containerı bu networke bağla demek.
 
-docker network disconnect -networkIsmi- -container- : Bu contarinerın bu network ile bağlantısını kes demek.
+**docker network disconnect -networkIsmi- -container-** : Bu contarinerın bu network ile bağlantısını kes demek.
 
 **NOT** : Bir network rm ile sileceğimiz zaman altında hiç bir container olmamalı.
 
@@ -212,9 +212,9 @@ Docker içindeki containerlarımızın günlüklerini görmemize olanak sağlaya
 Pc mizdeki ne kadarlık alanın docker tarafından kullanabileceğine Docker Desktop->Settings->Resources->Advanced altından bakabiliriz. Diyelim ki 10gb bir bilgisayarımız var ve docker 5 gb kullanıyor. Docker içerisindeki herhangi bir container bu 5 gb'nin hepsini bitirebilir. 10 tane containerımız varsa bu ram 10'a bölünmez bütün containerlar kullanmak istediği kadarına erişebilir bu 5 gb içerisinde. Fakat bu durum zaman zaman bize sorun 
 yaratabilir. Aniden programda çıkacak bir hata tüm rami bitirebilir vs. Buna çözüm olarak containerı yaratırken dockera ayırdığımız alanın ne kadarını kullanabileceğini hatta bu container için ayrılan alan dolduğunda kullanabileceği yedek yani swap alanı belirleyebiliriz. 
 
-docker container run --memory=100m -d ozgurozturknet/adanzyedocker -> Docker için ayrılmış alandan 100mb bu containera ayırdık. Fakat swap alan tanımlamadık.
+**docker container run --memory=100m -d ozgurozturknet/adanzyedocker** -> Docker için ayrılmış alandan 100mb bu containera ayırdık. Fakat swap alan tanımlamadık.
 
-docker container run --memory=100m --memory-swap=101m -d ozgurozturknet/adanzyedocker -> Bu containera docker için ayrılmış alandan 100mb direk kullanabileceği alan ve 101mb ise swap yani yedek alan ayırdık.
+**docker container run --memory=100m --memory-swap=101m -d ozgurozturknet/adanzyedocker** -> Bu containera docker için ayrılmış alandan 100mb direk kullanabileceği alan ve 101mb ise swap yani yedek alan ayırdık.
 
 **NOT** : Swap alan direk kullanabileceği alandan büyük olmak zorundadır.
 
