@@ -95,6 +95,10 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker image prune -a** : Bütün imageleri siler, Silmeden onay ister.
 
+**docker top -container-** : Belirtilen containerın içerisindeki processleri gösterir.
+
+**docker stats** : Localdeki tüm containerların ne kadar cpu ne kadar bellek harcadığını vs gösterir.
+
 
 ### Volume :
 Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
@@ -176,18 +180,43 @@ docker network disconnect -networkIsmi- -container- : Bu contarinerın bu networ
 
 -p yada --publish komutlarını kullanıyoruz.
 
-Örnek : docker container run -d -p 8080:80 -imagemiz-   --> İşte buradaki [-p 8080:80] port publish etme işlemi oluyor ve ilk 8080 yazdığımız host portumuz ikinci yazdığımız 80 ise container portumuz.
+Örnek : docker container run -d **-p 8080:80** -imagemiz-   --> İşte buradaki [-p 8080:80] port publish etme işlemi oluyor ve ilk 8080 yazdığımız host portumuz ikinci yazdığımız 80 ise container portumuz.
 
 NOT: Tek komutta birden fazla port publish edilebilir.
 
 
 
+### Docker Logs :
+Docker içindeki containerlarımızın günlüklerini görmemize olanak sağlayan konu.
+
+**docker logs --help** : Log başlığının altındaki tüm komutları tanıtan script.
+
+**docker logs -containerİsmi-** : Containera ait tüm log kayıtlarını görüntüler.
+
+**docker logs --timestamps -containerİsmi-** : Containera ait tüm log kayıtlarını **zaman damgalı** görüntüler.
+
+**docker logs --until 2023-01-21 -containerİsmi-** : Containera ait **bizim belirlediğimiz zamana kadar** olan log kayıtlarını görüntüler.
+
+**docker logs --since 2023-01-21 -containerİsmi-** : Containera ait **bizim belirlediğimiz zamandan beri** olan log kayıtlarını görüntüler.
+
+**docker logs --follow -containerİsmi-** : Containera ait tüm log kayıtlarını **canlı olarak** görüntüler.
+
+
+* **NOT** : Docker kurulduğu zaman default olarak kullanılan logging driverı json file'dır. Fakat eğer başka logging driverlarda log kayıtlarımızın tutulmasını istersek buda mümkün,aşağıdaki örnek scriptte olduğu gibi başka loggin driverlarda kullanabiliriz.
+
+**docker container run --log-driver splunk nginx** -> Nginx' i splunk adındaki log driverını kullanarak başlat.
 
 
 
+### Docker Memory ve Cpu Limitleri :
+Pc mizdeki ne kadarlık alanın docker tarafından kullanabileceğine Docker Desktop->Settings->Resources->Advanced altından bakabiliriz. Diyelim ki 10gb bir bilgisayarımız var ve docker 5 gb kullanıyor. Docker içerisindeki herhangi bir container bu 5 gb'nin hepsini bitirebilir. 10 tane containerımız varsa bu ram 10'a bölünmez bütün containerlar kullanmak istediği kadarına erişebilir bu 5 gb içerisinde. Fakat bu durum zaman zaman bize sorun 
+yaratabilir. Aniden programda çıkacak bir hata tüm rami bitirebilir vs. Buna çözüm olarak containerı yaratırken dockera ayırdığımız alanın ne kadarını kullanabileceğini hatta bu container için ayrılan alan dolduğunda kullanabileceği yedek yani swap alanı belirleyebiliriz. 
 
+docker container run --memory=100m -d ozgurozturknet/adanzyedocker -> Docker için ayrılmış alandan 100mb bu containera ayırdık. Fakat swap alan tanımlamadık.
 
+docker container run --memory=100m --memory-swap=101m -d ozgurozturknet/adanzyedocker -> Bu containera docker için ayrılmış alandan 100mb direk kullanabileceği alan ve 101mb ise swap yani yedek alan ayırdık.
 
+**NOT** : Swap alan direk kullanabileceği alandan büyük olmak zorundadır.
 
 
 
