@@ -1,4 +1,5 @@
 **Genel Notlar** :
+
 ping -containerIsmi- : Çalışan bir containera ping atma, bu pingi durdukmak için ctrl + C yapmamız lazım
 
 Herhangi bir containerı stop yada exit edip durdurmadan çıkmak istiyorsak ctrl P + ctrl Q basmalıyız(read escape sequence)
