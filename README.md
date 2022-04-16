@@ -138,13 +138,14 @@ Docker bize default olarak bridge networkü verse de zaman zaman kendi customer 
 
 * 2 tane container yaratacağız ve aynı network üzerinde tanımlayarak birbirleriyle haberleşmelerini sağlayacağız. 
 
-1. Öncelikle network yaratalım : docker network create kopru1
+1. Öncelikle network yaratalım : 
+-> docker network create kopru1
 2. 2 tane container yaratalım ve networklerinin kopru1 olduğunu tanımlayalım : 
-docker container run -d -it --name cont1 --net kopru1 sametcavur/image
-docker container run -d -it --name cont2 --net kopru1 sametcavur/image
+-> docker container run -d -it --name cont1 --net kopru1 sametcavur/image
+-> docker container run -d -it --name cont2 --net kopru1 sametcavur/image
 3. Herhangi bir containera girelim ve diğerine ping atalım.
-docker container exec -it cont2 sh
-ping con1
+-> docker container exec -it cont2 sh
+-> ping con1
 4. Burada artık cont2 nin cont1 e ping attığını göreceğiz.Pingi durdurmak için ctrl+C bas, Containerı durdumadan containerdan çıkmak için ctrl+P+Q bas.
 
 **Not** : Eğer 2 tane containerı aynı network üzerinde yaratmazsak birbirlerine container isimleri ile ping atamazlar, containerlara inspect ile girip ip adreslerini almamız lazım, ip adresleri üzerinden ping atabiliriz.
