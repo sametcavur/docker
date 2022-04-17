@@ -221,15 +221,23 @@ yaratabilir. Aniden programda çıkacak bir hata tüm rami bitirebilir vs. Buna 
 
 
 ### Docker Environment Variables :
+
 **Öncelikle bilmemiz gereken basic terminal scriptleri şunlardır**:
+
 <ins>**Windows için**</ins>
+
 **get-childitem Env:** : Windows hostumuzdaki tanımlı değişkenleri listeler.
+
 **$Env:VAR** : Windows hostumuzdaki bir değişkeni gösterir.
+
 **$Env:testVar="denemedir"** : Windows hostumuzda testVar adında değeri "denemedir" olan değişken yaratır.
 
 <ins>**Linux için**</ins>
+
 **printenv** : Linuxtaki tanımlı değişkenleri listeler.
+
 **echo $VAR** : Değişkeni gösterir.
+
 **--export testVar="denemedir"** : Linux hostumuzda testVar adında değeri "denemedir" olan değişken yaratır.
 
 
@@ -244,10 +252,15 @@ docker container run -it **--env TEMP** ubuntu bash -> Ubuntu'dan bir container 
 NOT : Üstteki gibi değişken tanımlama bazen zahmetli olabiliyor. 25 tane değişken tanımlamak istersek 25 kere **--env VAR=VALUE** mi yazacaktık? Alternatif ve diğer kolay yol şudur:
 
 Tanımlamak istediğimiz değişkenleri bir notepad'e yazalım
+
 VAR1="deneme1"
+
 Var1="deneme2"
+
 VAR2="deneme3"
+
 var2="deneme4"
+
 Bu şekilde yazdık diyelim. Şimdi aşağıdaki yazacağımız scriptin içerisine bu notepadin pathini vereceğiz ve artık bu notepadin içerisindeki değişkenleri o containerın içerisinde görebiliriz.
 
 docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** ubuntu bash
