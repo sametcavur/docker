@@ -253,13 +253,10 @@ NOT : Üstteki gibi değişken tanımlama bazen zahmetli olabiliyor. 25 tane de�
 
 Tanımlamak istediğimiz değişkenleri bir notepad'e yazalım
 
-VAR1="deneme1"
-
-Var1="deneme2"
-
-VAR2="deneme3"
-
-var2="deneme4"
+- VAR1="deneme1"
+- Var1="deneme2"
+- VAR2="deneme3"
+- var2="deneme4"
 
 Bu şekilde yazdık diyelim. Şimdi aşağıdaki yazacağımız scriptin içerisine bu notepadin pathini vereceğiz ve artık bu notepadin içerisindeki değişkenleri o containerın içerisinde görebiliriz.
 
