@@ -236,11 +236,12 @@ yaratabilir. Aniden programda çıkacak bir hata tüm rami bitirebilir vs. Buna 
 
 **printenv** : Linuxtaki tanımlı değişkenleri listeler.
 
-**echo $VAR** : Değişkeni gösterir.
+**echo $VAR** :  Linux hostumuzdaki bir değişkeni gösterir.
 
 **--export testVar="denemedir"** : Linux hostumuzda testVar adında değeri "denemedir" olan değişken yaratır.
 
 
+<br>
 Dockerda da kod yazar gibi değişken tanımlamak mümkün,şimdi nasıl değişken tanımalayacağız buna bakalım:
 
 docker container run -it **--env VAR1=deneme1** ubuntu bash -> Ubuntu'dan bir container yarat bashini aç ve bu containerın içerisinde değeri deneme1 olan VAR1 adında değişken olsun
