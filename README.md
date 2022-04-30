@@ -270,7 +270,7 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 
 
 **FROM |** Oluşturulacak imajın hangi imajdan oluşturulacağını belirten talimat. Dockerfile içerisinde geçmesi mecburi tek talimat budur. Mutlaka olmalıdır. 
-Ör: FROM ubuntu:18.04
+<br>Ör: FROM ubuntu:18.04
 
 **LABEL |** İmaj metadata’sına key=value şeklinde değer çiftleri eklemek için kullanılır. Örneğin team=development şeklinde bir etiket eklenerek bu imajın development ekibinin kullanması için yaratıldığı belirtilebilir.
 Ör: LABEL version:1.0.8
