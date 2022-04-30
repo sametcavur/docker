@@ -267,6 +267,8 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 
 ### DOCKER FİLE :
 **Some important commands : **
+
+
 **FROM |** Oluşturulacak imajın hangi imajdan oluşturulacağını belirten talimat. Dockerfile içerisinde geçmesi mecburi tek talimat budur. Mutlaka olmalıdır. 
 Ör: FROM ubuntu:18.04
 
