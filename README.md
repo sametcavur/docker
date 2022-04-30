@@ -272,20 +272,27 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **FROM |** Oluşturulacak imajın hangi imajdan oluşturulacağını belirten talimat. Dockerfile içerisinde geçmesi mecburi tek talimat budur. Mutlaka olmalıdır. 
 <br>Ör: FROM ubuntu:18.04
 
+**RUN |** İmaj oluşturulurken shell’de bir komut çalıştırmak istersek bu talimat kullanılır. Kısacası run ile shell'de komut çalıştırırız.
+<br>Ör: FROM ubuntu:18.04 RUN apt-get update
+
+**WORKDIR |** Bu komut ile geçmek istediğimiz klasöre geçeriz ve bu komuttan sonra çalışacak tüm komutlar bu klasörde gerçekleşir. Kısacası cd ** ile aynı işi görüyoruz tek fark böyle bir klasör yoksa onu oluşturur. 
+<br>Ör: WORKDIR /usr/src/app
+
+**COPY |** İmaj içine dosya veya klasör kopyalamak için kullanırız.
+<br>Ör: COPY samet.txt /newFolder  ->  Local pc'deki samet.txt'yi image içindeki newFolder klasörünün içine kopyala.
+
+**EXPOSE |** Bu imajdan oluşturulacak containerların hangi portlar üstünden erişilebileceğini yani hangi portların yayınlanacağını bu talimatla belirtirsiniz. 
+**Not :** Container yaratılırken bu portun publish edilmesi gereklidir.
+<br>Ör: EXPOSE 80/tcp 
+
+**CMD |** Bu imajdan container yaratıldığı zaman varsayılan olarak çalıştırmasını istediğiniz komutu bu talimat ile belirlersiniz. 
+<br>Ör: CMD java merhaba
+
 **LABEL |** İmaj metadata’sına key=value şeklinde değer çiftleri eklemek için kullanılır. Örneğin team=development şeklinde bir etiket eklenerek bu imajın development ekibinin kullanması için yaratıldığı belirtilebilir.
 <br>Ör: LABEL version:1.0.8
 
-**RUN |** İmaj oluşturulurken shell’de bir komut çalıştırmak istersek bu talimat kullanılır. Örneğin apt-get install xxx ile xxx isimli uygulamanın bu imaja yüklenmesi sağlanabilir. 
-<br>Ör: RUN apt-get update
-
-**WORKDIR |** cd xxx komutuyla ile istediğimiz klasöre geçmek yerine bu talimat kullanılarak istediğimiz klasöre geçer ve oradan çalışmaya devam ederiz. 
-<br>Ör: WORKDIR /usr/src/app
-
 **USER |** gireceğimiz komutları hangi kullanıcı ile çalıştırmasını istiyorsak bu talimat ile onu seçebiliriz. 
 <br>Ör: USER poweruser
-
-**COPY |** İmaj içine dosya veya klasör kopyalamak için kullanırız
-<br>Ör: COPY /source /user/src/app
 
 **ADD |** COPY ile aynı işi yapar yani dosya ya da klasör kopyalarsınız. Fakat ADD bunun yanında dosya kaynağının bir url olmasına da izin verir. Ayrıca ADD ile kaynak olarak bir .tar dosyası belirtilirse bu dosya imaja .tar olarak sıkıştırılmış haliyle değil de açılarak kopyalanır. 
 <br>Ör: ADD https://wordpress.org/latest.tar.gz /temp
@@ -299,14 +306,8 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **VOLUME |** Imaj içerisinde volume tanımlanamızı sağlayan talimat. Eğer bu volume host sistemde varsa container bunu kullanır. Yoksa yeni volume oluşturur. 
 <br>Ör: VOLUME /myvol
 
-**EXPOSE |** Bu imajdan oluşturulacak containerların hangi portlar üstünden erişilebileceğini yani hangi portların yayınlanacağını bu talimatla belirtirsiniz. 
-<br>Ör: EXPOSE 80/tcp
-
 **ENTRYPOINT |** Bu talimat ile bir containerın çalıştırılabilir bir uygulama gibi ayarlanabilmesini sağlarsınız.
 <br>Ör: ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-
-**CMD |** Bu imajdan container yaratıldığı zaman varsayılan olarak çalıştırmasını istediğiniz komutu bu talimat ile belirlersiniz. 
-<br>Ör: CMD java merhaba
 
 **HEALTHCHECK |** Bu talimat ile Docker'a bir konteynerin hala çalışıp çalışmadığını kontrol etmesini söylebiliriz. Docker varsayılan olarak container içerisinde çalışan ilk processi izler ve o çalıştığı sürece container çalışmaya devam eder. Fakat process çalışsa bile onun düzgün işlem yapıp yapmadığına bakmaz. HEALTHCHECK ile buna bakabilme imkanına kavuşuruz.
 <br>Ör: HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ || exit 1
