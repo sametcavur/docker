@@ -275,18 +275,47 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **RUN |** İmaj oluşturulurken shell’de bir komut çalıştırmak istersek bu talimat kullanılır. Kısacası run ile shell'de komut çalıştırırız.
 <br>Ör: FROM ubuntu:18.04 RUN apt-get update
 
+**CMD |** Bu imajdan container yaratıldığı zaman varsayılan olarak çalıştırmasını istediğiniz komutu bu talimat ile belirlersiniz. 
+<br>Ör: CMD java merhaba
+
+**CMD VE RUN Farkı**
+<br>RUN : İmage oluşturulurken çalışmasını istediğimiz komutlar için
+<br>CMD : İmage oluşturulmuş ve container oluşturulacakken çalışmasını istediğimiz komutlar için
+
+**ENTRYPOINT |** Bu talimat ile bir containerın çalıştırılabilir bir uygulama gibi ayarlanabilmesini sağlarsınız.
+<br>Ör: ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+**CMD VE ENTRYPOINT Farkı**
+<br>CMD ile dockerfile oluştururken yazdığımız scriptler imajı build ederken override edebiliriz. Örneğin docker file içerisinde CMD java myApp scriptini yazdıktan sonra docker image build myApp ls dersen buradaki ls komutu dockerfile içerisindeki CMD scriptinde olmamasına rağmen çalışır.
+<br>ENTRYPOINT komutunda ise dockerfile içerisinde ne yazarsak imajı build ederken de sadece dockerfile içindeki komut çalışır. Override edilemez.
+<br>**NOT :** Dockerfile içerisinde hem CMD hem de ENTRYPOINT komutunu aynı anda yazabiliriz. Bu durumda ise docker CMD komutunda yazılanları ENTRYPOINT komutuna parametre olarak ekler.
+<br>ÖRN:
+
+FROM centos:latest
+ENTRYPOINT ["ping" , "127.0.0.1"]
+
+üstteki docker file ile alttaki aynı şeyi yapar. Ayrıca üstte belirttiğim gibi CMD komutundaki scriptleri ezebilme yetkimiz olduğu için aşağıda dockerfile ile imaj build ederken farklı portta publish edebiliriz. Fakat üsttekinde değişiklik yapamayız.
+
+FROM centos:latest
+ENTRYPOINT ["ping"]
+CMD ["127.0.0.1"]
+
+
+
 **WORKDIR |** Bu komut ile geçmek istediğimiz klasöre geçeriz ve bu komuttan sonra çalışacak tüm komutlar bu klasörde gerçekleşir. Kısacası cd ** ile aynı işi görüyoruz tek fark böyle bir klasör yoksa onu oluşturur. 
 <br>Ör: WORKDIR /usr/src/app
 
 **COPY |** İmaj içine dosya veya klasör kopyalamak için kullanırız.
 <br>Ör: COPY samet.txt /newFolder  ->  Local pc'deki samet.txt'yi image içindeki newFolder klasörünün içine kopyala.
+<br>**NOT:** samet.txt . -> buradaki nokta(.) samet.txt'yi bulunduğun foldera kopyala demek.  
+
+**COPY VE ADD Farkı**
+<br>ADD ile COPY aynı işi yapar yani dosya ya da klasör kopyalarsınız. Fakat ADD bunun yanında dosya kaynağının bir url olmasına da izin verir.Ayrıca ADD ile kaynak olarak bir .tar dosyası belirtilirse bu dosya imaja .tar olarak sıkıştırılmış haliyle değil de açılarak kopyalanır.(Eğer bu sıkıştırılmış dosya uzak sunucuda ise yani bir web sitesinden çekiyorsak onu açmaz,dosyayı olduğu gibi imaja getirir,fakat localimizdeki sıkıştırılmış dosyayı açar ve o açılmış şekilde imaja taşır.)
+<br>Ör: ADD https://wordpress.org/latest.tar.gz /temp
 
 **EXPOSE |** Bu imajdan oluşturulacak containerların hangi portlar üstünden erişilebileceğini yani hangi portların yayınlanacağını bu talimatla belirtirsiniz. 
 **Not :** Container yaratılırken bu portun publish edilmesi gereklidir.
 <br>Ör: EXPOSE 80/tcp 
-
-**CMD |** Bu imajdan container yaratıldığı zaman varsayılan olarak çalıştırmasını istediğiniz komutu bu talimat ile belirlersiniz. 
-<br>Ör: CMD java merhaba
 
 **LABEL |** İmaj metadata’sına key=value şeklinde değer çiftleri eklemek için kullanılır. Örneğin team=development şeklinde bir etiket eklenerek bu imajın development ekibinin kullanması için yaratıldığı belirtilebilir.
 <br>Ör: LABEL version:1.0.8
@@ -294,11 +323,10 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **USER |** gireceğimiz komutları hangi kullanıcı ile çalıştırmasını istiyorsak bu talimat ile onu seçebiliriz. 
 <br>Ör: USER poweruser
 
-**ADD |** COPY ile aynı işi yapar yani dosya ya da klasör kopyalarsınız. Fakat ADD bunun yanında dosya kaynağının bir url olmasına da izin verir. Ayrıca ADD ile kaynak olarak bir .tar dosyası belirtilirse bu dosya imaja .tar olarak sıkıştırılmış haliyle değil de açılarak kopyalanır. 
-<br>Ör: ADD https://wordpress.org/latest.tar.gz /temp
-
 **ENV |** Imaj içinde environment variable tanımlamak için kullanılır
 <br>Ör: ENV TEMP_FOLDER="/temp"
+<br>**Not :** Dockerfile oluşturken - ENV USERNAME:"DefaultSamet" - diye script yazdık diyelim, bu değişkeni docker image build ederken ezebiliriz.
+<br>-> docker image build -e (yada --env) USERNAME="SametSamet" şeklinde override edebiliriz.
 
 **ARG |** ARG ile de variable tanımlarsınız. Fakat bu variable sadece imaj oluşturulurken yani build aşamasında kullanılır. Imajın oluşturulmuş halinde bu variable bulunmaz. ENV ile imaj oluşturulduktan sonra da imaj içinde olmasını istediğiniz variable tanımlarsınız, ARG ile sadece oluştururken kullanmanız gereken variable tanımlarsınız.
 <br>Ör: ARG VERSION:1.0
@@ -306,13 +334,27 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **VOLUME |** Imaj içerisinde volume tanımlanamızı sağlayan talimat. Eğer bu volume host sistemde varsa container bunu kullanır. Yoksa yeni volume oluşturur. 
 <br>Ör: VOLUME /myvol
 
-**ENTRYPOINT |** Bu talimat ile bir containerın çalıştırılabilir bir uygulama gibi ayarlanabilmesini sağlarsınız.
-<br>Ör: ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
-
 **HEALTHCHECK |** Bu talimat ile Docker'a bir konteynerin hala çalışıp çalışmadığını kontrol etmesini söylebiliriz. Docker varsayılan olarak container içerisinde çalışan ilk processi izler ve o çalıştığı sürece container çalışmaya devam eder. Fakat process çalışsa bile onun düzgün işlem yapıp yapmadığına bakmaz. HEALTHCHECK ile buna bakabilme imkanına kavuşuruz.
 <br>Ör: HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ || exit 1
+ <br>-> --interval=5m : Her 5 dakika da bir bu containerın çalışıp çalışmadığını kontrol et.
+ <br>-> --timeout=3s : Bu healtcheck 3 saniye içerisinde yanıt alamazsa fail yani un healty olarak işaretle
+ <br>-> --start-period=5s : Container başlamadan önce bir kaç işlem gerçekleşebilir. Ve eğer bunu scripti eklemezsek direk fail olur. Bu script ile container başladıktan 5 saniye sonra healtcheck'i kontrol ediyoruz.
+ <br>-> --retries=3 : Kaç deneme sonunda containerın unhealty olarak işaretleneceğini belirtiyoruz. Eğer 3 kere healty sonucunu alırsak sonrasında containerın durumunu healty işaretler.
 
 **SHELL |** Dockerfile'ın komutları işleyeceği shell'in hangisi olduğunu belirtiriz. Linux için varsayılan shell ["/bin/sh", "-c"],Windows için ["cmd", "/S", "/C"]. Bunları SHELL talimatı ile değiştirebiliriz. 
 <br>Ör: SHELL ["powershell", "-command"]
+
+**Exec Form vs Shell Form**
+**Exec Form :** CMD ["java", "uygulama"] 
+**Shell Form :** CMD java uygulama
+1: Eğer komut Shell formunda girilirse Docker bu imajdan container yaratıldığı zaman bu komutu
+varsayılan shell'i çalıştırarak onun içerisinde girer. Bu nedenle containerda çalışan 1. Process yani
+pid1 bu shell process'i olur.
+2: Eğer komut Exec formunda girildiyse Docker herhangi bir shell çalıştırmaz ve komut direk
+process olarak çalışır ve container'ın pid1'ioprocess olur.
+3: Exec formunda çalıştırılan komutlar herhangi bir shell processi çalışmadı için Environment
+Variable gibi bazı değerlere erişemezler. Bunu göz önünde bulundurmak gerekir.
+4: Eğer Entrypoint ve CMD birlikte kullanılacaksa Exec form kullanılmalıdır. Shell formu
+kullanıldığında CMD'deki komutlar ENTRYPOINT'e parametre olarak aktarılmaz.
 
 
