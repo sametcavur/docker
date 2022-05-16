@@ -364,15 +364,12 @@ kullanıldığında CMD'deki komutlar ENTRYPOINT'e parametre olarak aktarılmaz.
 
 **Multi-stage Build**
 Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı bölümlenmiş imageler olmasına olanak sağlıyor. Ve her bu bölümlenmiş imajları bir sonraki imajlara kopyalayarak asıl imaj boyutumuzun küçülmesine imkan tanıyor.
-
 <br>FROM mcr.microsoft.com/java/jdk:8-zulu-alpine
 <br>COPY /source /usr/src/uygulama
 <br>WORKDIR /usr/src/uygulama
 <br>RUN javac uygulama.java
 <br>CMD ["java","uygulama"]
-
 <br>Üstteki docker file ile alttaki aynı işi görüyor fakat üstteki 300 mb yer tutarken alttaki 140 mb yer tutuyor.
-
 <br>FROM mcr.microsoft.com/java/jdk:8-zulu-alpine **AS derleyici**
 <br>COPY /source /usr/src/uygulama
 <br>WORKDIR /usr/srk/uygulama
