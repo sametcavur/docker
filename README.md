@@ -279,8 +279,8 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>Ör: CMD java merhaba
 
 **CMD VE RUN Farkı**
-<br>RUN : İmage oluşturulurken çalışmasını istediğimiz komutlar için
-<br>CMD : İmage oluşturulmuş ve container oluşturulacakken çalışmasını istediğimiz komutlar için
+<br>**RUN :** İmage oluşturulurken çalışmasını istediğimiz komutlar için
+<br>**CMD :** İmage oluşturulmuş ve container oluşturulacakken çalışmasını istediğimiz komutlar için
 
 **ENTRYPOINT |** Bu talimat ile bir containerın çalıştırılabilir bir uygulama gibi ayarlanabilmesini sağlarsınız.
 <br>Ör: ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
@@ -289,16 +289,15 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>CMD ile dockerfile oluştururken yazdığımız scriptler imajı build ederken override edebiliriz. Örneğin docker file içerisinde CMD java myApp scriptini yazdıktan sonra docker image build myApp ls dersen buradaki ls komutu dockerfile içerisindeki CMD scriptinde olmamasına rağmen çalışır.
 <br>ENTRYPOINT komutunda ise dockerfile içerisinde ne yazarsak imajı build ederken de sadece dockerfile içindeki komut çalışır. Override edilemez.
 <br>**NOT :** Dockerfile içerisinde hem CMD hem de ENTRYPOINT komutunu aynı anda yazabiliriz. Bu durumda ise docker CMD komutunda yazılanları ENTRYPOINT komutuna parametre olarak ekler.
-<br>ÖRN:
-
-FROM centos:latest
-ENTRYPOINT ["ping" , "127.0.0.1"]
+<br>**ÖRN:**
+<br>FROM centos:latest
+<br>ENTRYPOINT ["ping" , "127.0.0.1"]
 
 üstteki docker file ile alttaki aynı şeyi yapar. Ayrıca üstte belirttiğim gibi CMD komutundaki scriptleri ezebilme yetkimiz olduğu için aşağıda dockerfile ile imaj build ederken farklı portta publish edebiliriz. Fakat üsttekinde değişiklik yapamayız.
 
-FROM centos:latest
-ENTRYPOINT ["ping"]
-CMD ["127.0.0.1"]
+<br>FROM centos:latest
+<br>ENTRYPOINT ["ping"]
+<br>CMD ["127.0.0.1"]
 
 
 
@@ -347,14 +346,14 @@ CMD ["127.0.0.1"]
 **Exec Form vs Shell Form**
 **Exec Form :** CMD ["java", "uygulama"] 
 **Shell Form :** CMD java uygulama
-1: Eğer komut Shell formunda girilirse Docker bu imajdan container yaratıldığı zaman bu komutu
+<br>1: Eğer komut Shell formunda girilirse Docker bu imajdan container yaratıldığı zaman bu komutu
 varsayılan shell'i çalıştırarak onun içerisinde girer. Bu nedenle containerda çalışan 1. Process yani
 pid1 bu shell process'i olur.
-2: Eğer komut Exec formunda girildiyse Docker herhangi bir shell çalıştırmaz ve komut direk
+<br>2: Eğer komut Exec formunda girildiyse Docker herhangi bir shell çalıştırmaz ve komut direk
 process olarak çalışır ve container'ın pid1'ioprocess olur.
-3: Exec formunda çalıştırılan komutlar herhangi bir shell processi çalışmadı için Environment
+<br>3: Exec formunda çalıştırılan komutlar herhangi bir shell processi çalışmadı için Environment
 Variable gibi bazı değerlere erişemezler. Bunu göz önünde bulundurmak gerekir.
-4: Eğer Entrypoint ve CMD birlikte kullanılacaksa Exec form kullanılmalıdır. Shell formu
+<br>4: Eğer Entrypoint ve CMD birlikte kullanılacaksa Exec form kullanılmalıdır. Shell formu
 kullanıldığında CMD'deki komutlar ENTRYPOINT'e parametre olarak aktarılmaz.
 
 
