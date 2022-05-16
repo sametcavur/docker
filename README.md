@@ -99,6 +99,8 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 
 **docker stats** : Localdeki tüm containerların ne kadar cpu ne kadar bellek harcadığını vs gösterir.
 
+**docker cp** : Bu komut ile bir containerın içinden bir dosya yada klasörü localimize çekebiliriz. Fakat bu containerın silinmemiş olması lazım, container çalışıyor yada stop halde olabilir fakat silinmemiş olmalıdır.
+**Ör :** docker cp javauygulama:/usr/src/uygulama . -> Bu komutun türkçesi şöyledir : javauygulama adındaki containerın içinde /usr/src/uygulama klasörüne git .(nokta) ile bu klasörün içindeki herşeyi, şuan cmd içinde neredeysek oraya kopyala(pwd ile bakabilirsin). 
 
 ### Volume :
 Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
@@ -266,8 +268,11 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 
 
 ### DOCKER FİLE :
-**Some important commands :**
+** Oluşturulan Dockerfile'ı Çalıştırma :** <br>
+Öncelikle build etmek istediğimiz dockerfile'nin tam adı Dockerfile olmalıdır. Daha sonra power shell'de bu docker file'nin olduğu klasöre gidip şu komutu yazıyoruz.
+<br> docker image build -t denemeDockerfile .  -> buradaki -t denemeDockerfile imagenin tag'i ve . (nokta) ise bulunduğumuz klasördeki dockerfile'yi container haline getir demek.
 
+<br>**Some important commands :**
 
 **FROM |** Oluşturulacak imajın hangi imajdan oluşturulacağını belirten talimat. Dockerfile içerisinde geçmesi mecburi tek talimat budur. Mutlaka olmalıdır. 
 <br>Ör: FROM ubuntu:18.04
@@ -357,3 +362,23 @@ Variable gibi bazı değerlere erişemezler. Bunu göz önünde bulundurmak gere
 kullanıldığında CMD'deki komutlar ENTRYPOINT'e parametre olarak aktarılmaz.
 
 
+**Multi-stage Build**
+Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı bölümlenmiş imageler olmasına olanak sağlıyor. Ve her bu bölümlenmiş imajları bir sonraki imajlara kopyalayarak asıl imaj boyutumuzun küçülmesine imkan tanıyor.
+
+<br>FROM mcr.microsoft.com/java/jdk:8-zulu-alpine
+<br>COPY /source /usr/src/uygulama
+<br>WORKDIR /usr/src/uygulama
+<br>RUN javac uygulama.java
+<br>CMD ["java","uygulama"]
+
+<br>Üstteki docker file ile alttaki aynı işi görüyor fakat üstteki 300 mb yer tutarken alttaki 140 mb yer tutuyor.
+
+<br>FROM mcr.microsoft.com/java/jdk:8-zulu-alpine **AS derleyici**
+<br>COPY /source /usr/src/uygulama
+<br>WORKDIR /usr/srk/uygulama
+<br>RUN javac uygulama.java
+<br>
+<br>FROM mcr.microsoft.com/java/jre:8-zulu-alpine
+<br>WORKDIR /uygulama
+<br>COPY **--from=derleyici** /usr/src/uygulama
+<br>CMD ["java", "uygulama"]
