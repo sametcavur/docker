@@ -348,7 +348,7 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **SHELL |** Dockerfile'ın komutları işleyeceği shell'in hangisi olduğunu belirtiriz. Linux için varsayılan shell ["/bin/sh", "-c"],Windows için ["cmd", "/S", "/C"]. Bunları SHELL talimatı ile değiştirebiliriz. 
 <br>Ör: SHELL ["powershell", "-command"]
 
-**Exec Form vs Shell Form**<br>
+### Exec Form vs Shell Form
 **Exec Form :** CMD ["java", "uygulama"] <br>
 **Shell Form :** CMD java uygulama<br>
 <br>1: Eğer komut Shell formunda girilirse Docker bu imajdan container yaratıldığı zaman bu komutu
@@ -362,7 +362,7 @@ Variable gibi bazı değerlere erişemezler. Bunu göz önünde bulundurmak gere
 kullanıldığında CMD'deki komutlar ENTRYPOINT'e parametre olarak aktarılmaz.
 
 
-**Multi-stage Build**
+### Multi-stage Build
 Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı bölümlenmiş imageler olmasına olanak sağlıyor. Ve her bu bölümlenmiş imajları bir sonraki imajlara kopyalayarak asıl imaj boyutumuzun küçülmesine imkan tanıyor.
 <br> **ÖR:**
 <br>FROM mcr.microsoft.com/java/jdk:8-zulu-alpine
