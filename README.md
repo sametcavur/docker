@@ -343,9 +343,9 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 **SHELL |** Dockerfile'ın komutları işleyeceği shell'in hangisi olduğunu belirtiriz. Linux için varsayılan shell ["/bin/sh", "-c"],Windows için ["cmd", "/S", "/C"]. Bunları SHELL talimatı ile değiştirebiliriz. 
 <br>Ör: SHELL ["powershell", "-command"]
 
-**Exec Form vs Shell Form**
-**Exec Form :** CMD ["java", "uygulama"] 
-**Shell Form :** CMD java uygulama
+**Exec Form vs Shell Form**<br>
+**Exec Form :** CMD ["java", "uygulama"] <br>
+**Shell Form :** CMD java uygulama<br>
 <br>1: Eğer komut Shell formunda girilirse Docker bu imajdan container yaratıldığı zaman bu komutu
 varsayılan shell'i çalıştırarak onun içerisinde girer. Bu nedenle containerda çalışan 1. Process yani
 pid1 bu shell process'i olur.
