@@ -186,7 +186,13 @@ Docker bize default olarak bridge networkü verse de zaman zaman kendi customer 
 
 NOT: Tek komutta birden fazla port publish edilebilir.
 
+### Docker Save and Docker Load :
+İnternete erişemediğimiz yerle hali hazırda olan bir containerımızı taşıyabilir yada elimizde var ise localimizde çalıştırabiliriz.
+<br> docker save myContainer:latest -o myContainer.tar  -> localimizde bulunan myContainer:latest isimli containerı myContainer.tar ismi ve uzantısıyla bulunduğumuz klasöre çıkar.
 
+<br> üstteki gibi dosya haline getirdiğimiz containerı usb gibi herhangi bir taşınabilir bellek ile taşımak istediğimiz pc'ye taşıyıp alttaki gibi çekebiliriz.
+
+<br> docker load -i .\myContainer.tar  -> myContainer.tar isimli sıkıştırılmış imajı localimize taşı.
 
 ### Docker Logs :
 Docker içindeki containerlarımızın günlüklerini görmemize olanak sağlayan konu.
@@ -305,7 +311,6 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>CMD ["127.0.0.1"]
 
 
-
 **WORKDIR |** Bu komut ile geçmek istediğimiz klasöre geçeriz ve bu komuttan sonra çalışacak tüm komutlar bu klasörde gerçekleşir. Kısacası cd ** ile aynı işi görüyoruz tek fark böyle bir klasör yoksa onu oluşturur. 
 <br>Ör: WORKDIR /usr/src/app
 
@@ -333,8 +338,24 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>-> docker image build -e (yada --env) USERNAME="SametSamet" şeklinde override edebiliriz.
 
 **ARG |** ARG ile de variable tanımlarsınız. Fakat bu variable sadece imaj oluşturulurken yani build aşamasında kullanılır. Imajın oluşturulmuş halinde bu variable bulunmaz. ENV ile imaj oluşturulduktan sonra da imaj içinde olmasını istediğiniz variable tanımlarsınız, ARG ile sadece oluştururken kullanmanız gereken variable tanımlarsınız.
-<br>Ör: ARG VERSION:1.0
+		Daha basitçe : Bu komut ile dockerfile içerisinde sürekli değişmesi gereken bir değişken var ise bir tane variable tanımlıyoruz ve docker build ederken bu değişkeni sürekli değiştirebiliyoruz.
+<br>Ör: 
+<br>FROM ubuntu:latest
+<br>WORKDIR /gecici
+<br>ADD https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tgz .
+<br>CMD 1s -al
 
+<br> şöyle bir docker file'miz var ve yarın öbürgün 3.7.6 değilde 3.8.1 versiyonunu kullanmak istersek gelip buradan yeni bir dockerfile oluşturmamız gerekecek. Fakat bu ARG komutu ile buna gerek kalmıyor:
+
+<br>FROM ubuntu:latest
+<br>**ARG VERSION**
+<br>WORKDIR /gecici
+<br>ADD https://www.python.org/ftp/python/**${VERSION}**/Python-**${VERSION}**.tgz .
+<br>CMD 1s -al
+
+<br> docker image build -t x2 **--build-arg VERSION=3.7.6 .**(Not sondaki nokta 3.8.1'in noktası değil, bütün herşeyi bu klasöre kopyalanın noktası)
+<br> docker image build -t x2 **--build-arg VERSION=3.8.1 .**(Not sondaki nokta 3.8.1'in noktası değil, bütün herşeyi bu klasöre kopyalanın noktası)
+                                                       
 **VOLUME |** Imaj içerisinde volume tanımlanamızı sağlayan talimat. Eğer bu volume host sistemde varsa container bunu kullanır. Yoksa yeni volume oluşturur. 
 <br>Ör: VOLUME /myvol
 
@@ -382,3 +403,5 @@ Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı böl
 <br>WORKDIR /uygulama
 <br>COPY **--from=derleyici** /usr/src/uygulama
 <br>CMD ["java", "uygulama"]
+
+--it --exec farkına bak..
