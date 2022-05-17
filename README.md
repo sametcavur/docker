@@ -100,7 +100,7 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker stats** : Localdeki tüm containerların ne kadar cpu ne kadar bellek harcadığını vs gösterir.
 
 **docker cp** : Bu komut ile bir containerın içinden bir dosya yada klasörü localimize çekebiliriz. Fakat bu containerın silinmemiş olması lazım, container çalışıyor yada stop halde olabilir fakat silinmemiş olmalıdır.
-**Ör :** docker cp javauygulama:/usr/src/uygulama . -> Bu komutun türkçesi şöyledir : javauygulama adındaki containerın içinde /usr/src/uygulama klasörüne git .(nokta) ile bu klasörün içindeki herşeyi, şuan cmd içinde neredeysek oraya kopyala(pwd ile bakabilirsin). 
+<br> **Ör :** docker cp javauygulama:/usr/src/uygulama . -> Bu komutun türkçesi şöyledir : javauygulama adındaki containerın içinde /usr/src/uygulama klasörüne git .(nokta) ile bu klasörün içindeki herşeyi, şuan cmd içinde neredeysek oraya kopyala(pwd ile bakabilirsin). 
 
 ### Volume :
 Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
@@ -177,7 +177,6 @@ Docker bize default olarak bridge networkü verse de zaman zaman kendi customer 
 **NOT** : Bir network rm ile sileceğimiz zaman altında hiç bir container olmamalı.
 
 
-** **
 **Port Publish** : Bu konuyu şöyle açıklayabiliriz. Üstteki networks konusunda gördüğümüz host network'ü kullanarak containerların haberleşmesini sağladığımızı varsayalım. Fakat Bu containerlara third party bir erişim olmasını istediğimizde bizim bu containerlarını out'a publish etmiş olmamız lazım. Bunu ise şöyle yapıyoruz.
 
 -p yada --publish komutlarını kullanıyoruz.
@@ -188,10 +187,9 @@ NOT: Tek komutta birden fazla port publish edilebilir.
 
 ### Docker Save and Docker Load :
 İnternete erişemediğimiz yerle hali hazırda olan bir containerımızı taşıyabilir yada elimizde var ise localimizde çalıştırabiliriz.
+<br> **ÖR :**
 <br> docker save myContainer:latest -o myContainer.tar  -> localimizde bulunan myContainer:latest isimli containerı myContainer.tar ismi ve uzantısıyla bulunduğumuz klasöre çıkar.
-
 <br> üstteki gibi dosya haline getirdiğimiz containerı usb gibi herhangi bir taşınabilir bellek ile taşımak istediğimiz pc'ye taşıyıp alttaki gibi çekebiliriz.
-
 <br> docker load -i .\myContainer.tar  -> myContainer.tar isimli sıkıştırılmış imajı localimize taşı.
 
 ### Docker Logs :
