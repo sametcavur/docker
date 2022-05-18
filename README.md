@@ -113,7 +113,7 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker image pull** : Bu komut ile registry'den localimize bir imaj çekiyoruz.
 <br> **Ör :** docker image pull registryAdresi:tagimiz
 
-<img src="" width="925"/> 
+<img src="https://user-images.githubusercontent.com/54666839/169167596-1dd47d07-9ce3-4d67-ac98-e715f1a82f6d.png" width="925"/> 
 
 ### Volume :
 Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
