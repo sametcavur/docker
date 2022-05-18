@@ -102,6 +102,19 @@ docker management commands altında bu container gibi çalışma alanlarımız m
 **docker cp** : Bu komut ile bir containerın içinden bir dosya yada klasörü localimize çekebiliriz. Fakat bu containerın silinmemiş olması lazım, container çalışıyor yada stop halde olabilir fakat silinmemiş olmalıdır.
 <br> **Ör :** docker cp javauygulama:/usr/src/uygulama . -> Bu komutun türkçesi şöyledir : javauygulama adındaki containerın içinde /usr/src/uygulama klasörüne git .(nokta) ile bu klasörün içindeki herşeyi, şuan cmd içinde neredeysek oraya kopyala(pwd ile bakabilirsin). 
 
+### Docker Image Tag - Push - Pull :
+
+**docker image tag** :Bu komut ile localimizde bulunan bir image'yi tagleyebiliriz.
+<br> **Ör :** docker image tag ubuntu:18.04 registryAdresi:tagimiz 
+
+**docker image push** : Bu komut ile registry'e localimizdeki bir imajı gönderiyoruz.
+<br> **Ör :** docker image push registryAdresi:tagimiz
+
+**docker image pull** : Bu komut ile registry'den localimize bir imaj çekiyoruz.
+<br> **Ör :** docker image pull registryAdresi:tagimiz
+
+<img src="" width="925"/> 
+
 ### Volume :
 Varsayalım ki aynı imageden 3 tane container oluşturduk ve içerisinde farklı farklı işlemler yaptık, günün sonunda o işlemler hiç bir zaman birbirine karışmaz. Her bir containerın içerisinde yaptığımız işlemler o containera özel olur. Fakat bazı durumlar vardır ki biz o containerda yaptığımız işlemleri,değişiklikleri başka containerda da görebilelim. Bunu git teki dev branchine benzetebilirsin. İşte Volumeler aslında dev branchi oluyor, biz devden branch koparır localimizde değişiklik yaparız daha sonra merge edilince değişikliğimiz dev'de görülürüz. Volumelerinde mantığı aslında budur.
 
