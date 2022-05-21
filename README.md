@@ -432,35 +432,35 @@ En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için 
 
 **NOT :** Docker compose dosyalarında herhangi bir image kullanmak istiyorsak ve o image hakkında bilgimiz çok yok ise o imageyi dockerhubta aratıp onun hakkında detaylı bilgilere ulaşabiliriz.
 
-<br> version:3.7
-<br> 
-<br> services:
-<br>    mysqldb:
-<br>      image: mysql
-<br>      environment:
-<br>       MYSQL DATABASE : proje
-<br>       MYSQL_USER : projemaster
-<br>       MYSQL_PASSWORD : master1234
-<br>       MYSQL_ROOT PASSWORD : master1234
-<br>      networks:
-<br>         webnet
-<br> 
-<br>    websrv:
-<br>      build: .   -> Bu aslında bu dockercompose.yml dosyasının olduğu folder'daki imageyi çalıştır demek, eğer özel bir image kullanmak istersek bu yolu kullanabiliriz.
-<br>      depends on:
-<br>        -mysqldb
-<br>      ports:
-<br>          "80:80"
-<br>      restart : always
-<br>      networks:
-<br>          webnet
-<br>      environment:
-<br>        DB_SERVER : mysqldb
-<br>        DB_USERNAME : admin
-<br>        DB PASS : 1234
-<br>        DB_NAME : mysqldb
-<br> 
-<br> networks:
-<br>   webnet:
-<br>     driver:bridge
+ version:3.7
+
+ services:
+    mysqldb:
+      image: mysql
+      environment:
+      	MYSQL DATABASE : proje
+      	MYSQL_USER : projemaster
+       	MYSQL_PASSWORD : master1234
+       	MYSQL_ROOT PASSWORD : master1234
+      networks:
+         webnet
+
+    websrv:
+      build: .   
+      depends on:
+        -mysqldb
+      ports:
+          "80:80"
+      networks:
+         webnet
+      environment:
+         DB_SERVER : mysqldb
+         DB_USERNAME : admin
+         DB PASS : 1234
+         DB_NAME : mysqldb
+
+ networks:
+    webnet:
+      driver:bridge
+build . -> Bu aslında bu dockercompose.yml dosyasının olduğu folder'daki dockerfileyi çalıştır demek, eğer özel bir image kullanmak istersek bu yolu kullanabiliriz.
 
