@@ -415,4 +415,52 @@ Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı böl
 <br>COPY **--from=derleyici** /usr/src/uygulama
 <br>CMD ["java", "uygulama"]
 
---it --exec farkına bak..
+
+### Docker Compose
+Docker compose, birden fazla containerı çalıştıracağımız zaman tek bir dosya ile hepsini çalıştırıp yönetmemizi sağlayan yaml türünde oluşturulması zorunlu olan bir docker aracıdır.
+<br> Componentleri şunlardır :
+**- version :** Version bu yaml dosyasında hangi sürümü kullanacağınızı belirtir. Compose dosyasının versionu ile değil de bu dosyada kullanabileceğin özelliklerin sürümüdür. Bu sebepten ötürü en güncel sürümü kullanmak mantıklıdır
+En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için şu linke gidebilirsin -> https://docs.docker.com/compose/compose-file/compose-versioning/
+
+**- services :** Services çalıştıracağımız her bir image demektir.
+
+**- networks :** Containerların birbirleri ile haberleşmesini sağlayan ortamlardan her biridir. Yukarıda networkler ile ilgili daha geniş bir bilgi edinebilirsin.
+
+**- volumes :** Containerların birbirleri ile koordineli çalışmasını sağlayan ortamlardır. Yukarıda volumele ile ilgili daha geniş bir bilgi edinebilirsin.
+
+**- secrets :**
+
+**NOT :** Docker compose dosyalarında herhangi bir image kullanmak istiyorsak ve o image hakkında bilgimiz çok yok ise o imageyi dockerhubta aratıp onun hakkında detaylı bilgilere ulaşabiliriz.
+
+<br> version:3.7
+<br> 
+<br> services:
+<br>    mysqldb:
+<br>      image: mysql
+<br>      environment:
+<br>       MYSQL DATABASE : proje
+<br>       MYSQL_USER : projemaster
+<br>       MYSQL_PASSWORD : master1234
+<br>       MYSQL_ROOT PASSWORD : master1234
+<br>      networks:
+<br>         webnet
+<br> 
+<br>    websrv:
+<br>      build: .   -> Bu aslında bu dockercompose.yml dosyasının olduğu folder'daki imageyi çalıştır demek, eğer özel bir image kullanmak istersek bu yolu kullanabiliriz.
+<br>      depends on:
+<br>        -mysqldb
+<br>      ports:
+<br>          "80:80"
+<br>      restart : always
+<br>      networks:
+<br>          webnet
+<br>      environment:
+<br>        DB_SERVER : mysqldb
+<br>        DB_USERNAME : admin
+<br>        DB PASS : 1234
+<br>        DB_NAME : mysqldb
+<br> 
+<br> networks:
+<br>   webnet:
+<br>     driver:bridge
+
