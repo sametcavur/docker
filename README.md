@@ -433,6 +433,6 @@ En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için 
 **NOT :** Docker compose dosyalarında herhangi bir image kullanmak istiyorsak ve o image hakkında bilgimiz çok yok ise o imageyi dockerhubta aratıp onun hakkında detaylı bilgilere ulaşabiliriz.
 
 Örnek dockercompose.yml dosyası:
-<img src="https://user-images.githubusercontent.com/54666839/169655602-50532ab9-a4e3-4aa6-9330-91772ca616bb.png"/> 
+<img src="https://user-images.githubusercontent.com/54666839/169655809-d4573bff-205d-4db9-8ee2-6d09c8c0d2b5.png"/> 
 
 
