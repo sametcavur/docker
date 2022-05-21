@@ -418,7 +418,7 @@ Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı böl
 
 ### Docker Compose
 Docker compose, birden fazla containerı çalıştıracağımız zaman tek bir dosya ile hepsini çalıştırıp yönetmemizi sağlayan yaml türünde oluşturulması zorunlu olan bir docker aracıdır.
-<br> Componentleri şunlardır :
+<br> Componentleri şunlardır :<br>
 **- version :** Version bu yaml dosyasında hangi sürümü kullanacağınızı belirtir. Compose dosyasının versionu ile değil de bu dosyada kullanabileceğin özelliklerin sürümüdür. Bu sebepten ötürü en güncel sürümü kullanmak mantıklıdır
 En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için şu linke gidebilirsin -> https://docs.docker.com/compose/compose-file/compose-versioning/
 
@@ -432,35 +432,7 @@ En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için 
 
 **NOT :** Docker compose dosyalarında herhangi bir image kullanmak istiyorsak ve o image hakkında bilgimiz çok yok ise o imageyi dockerhubta aratıp onun hakkında detaylı bilgilere ulaşabiliriz.
 
- version:3.7
+Örnek dockercompose.yml dosyası:
+<img src="https://user-images.githubusercontent.com/54666839/169655809-d4573bff-205d-4db9-8ee2-6d09c8c0d2b5.png"/> 
 
- services:
-    mysqldb:
-      image: mysql
-      environment:
-      	MYSQL DATABASE : proje
-      	MYSQL_USER : projemaster
-       	MYSQL_PASSWORD : master1234
-       	MYSQL_ROOT PASSWORD : master1234
-      networks:
-         webnet
-
-    websrv:
-      build: .   
-      depends on:
-        -mysqldb
-      ports:
-          "80:80"
-      networks:
-         webnet
-      environment:
-         DB_SERVER : mysqldb
-         DB_USERNAME : admin
-         DB PASS : 1234
-         DB_NAME : mysqldb
-
- networks:
-    webnet:
-      driver:bridge
-build . -> Bu aslında bu dockercompose.yml dosyasının olduğu folder'daki dockerfileyi çalıştır demek, eğer özel bir image kullanmak istersek bu yolu kullanabiliriz.
 
