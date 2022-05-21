@@ -418,7 +418,7 @@ Multi-stage build özelliği imaj yaratırken her bir aşamayı ayrı ayrı böl
 
 ### Docker Compose
 Docker compose, birden fazla containerı çalıştıracağımız zaman tek bir dosya ile hepsini çalıştırıp yönetmemizi sağlayan yaml türünde oluşturulması zorunlu olan bir docker aracıdır.
-<br> Componentleri şunlardır :
+<br> Componentleri şunlardır :<br>
 **- version :** Version bu yaml dosyasında hangi sürümü kullanacağınızı belirtir. Compose dosyasının versionu ile değil de bu dosyada kullanabileceğin özelliklerin sürümüdür. Bu sebepten ötürü en güncel sürümü kullanmak mantıklıdır
 En güncel versiyona bakmak ve versiyonlarda gelen özellikleri incelemek için şu linke gidebilirsin -> https://docs.docker.com/compose/compose-file/compose-versioning/
 
