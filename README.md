@@ -285,8 +285,8 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 
 
 ### DOCKER FİLE :
-** Oluşturulan Dockerfile'ı Çalıştırma :** <br>
-Öncelikle build etmek istediğimiz dockerfile'nin tam adı Dockerfile olmalıdır. Daha sonra power shell'de bu docker file'nin olduğu klasöre gidip şu komutu yazıyoruz.
+**Oluşturulan Dockerfile'ı Çalıştırma :** 
+<br>Öncelikle build etmek istediğimiz dockerfile'nin tam adı Dockerfile olmalıdır. Daha sonra power shell'de bu docker file'nin olduğu klasöre gidip şu komutu yazıyoruz.
 <br> docker image build -t denemeDockerfile .  -> buradaki -t denemeDockerfile imagenin tag'i ve . (nokta) ise bulunduğumuz klasördeki dockerfile'yi container haline getir demek.
 
 <br>**Some important commands :**
@@ -334,7 +334,7 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>Ör: ADD https://wordpress.org/latest.tar.gz /temp
 
 **EXPOSE |** Bu imajdan oluşturulacak containerların hangi portlar üstünden erişilebileceğini yani hangi portların yayınlanacağını bu talimatla belirtirsiniz. 
-**Not :** Container yaratılırken bu portun publish edilmesi gereklidir.
+<br>**Not :** Container yaratılırken bu portun publish edilmesi gereklidir.
 <br>Ör: EXPOSE 80/tcp 
 
 **LABEL |** İmaj metadata’sına key=value şeklinde değer çiftleri eklemek için kullanılır. Örneğin team=development şeklinde bir etiket eklenerek bu imajın development ekibinin kullanması için yaratıldığı belirtilebilir.
@@ -349,7 +349,7 @@ docker container run -it **--env-file C:\Users\samet.cavur\Desktop\deneme.txt** 
 <br>-> docker image build -e (yada --env) USERNAME="SametSamet" şeklinde override edebiliriz.
 
 **ARG |** ARG ile de variable tanımlarsınız. Fakat bu variable sadece imaj oluşturulurken yani build aşamasında kullanılır. Imajın oluşturulmuş halinde bu variable bulunmaz. ENV ile imaj oluşturulduktan sonra da imaj içinde olmasını istediğiniz variable tanımlarsınız, ARG ile sadece oluştururken kullanmanız gereken variable tanımlarsınız.
-		Daha basitçe : Bu komut ile dockerfile içerisinde sürekli değişmesi gereken bir değişken var ise bir tane variable tanımlıyoruz ve docker build ederken bu değişkeni sürekli değiştirebiliyoruz.
+		<br>Daha basitçe : Bu komut ile dockerfile içerisinde sürekli değişmesi gereken bir değişken var ise bir tane variable tanımlıyoruz ve docker build ederken bu değişkeni sürekli değiştirebiliyoruz.
 <br>Ör: 
 <br>FROM ubuntu:latest
 <br>WORKDIR /gecici
